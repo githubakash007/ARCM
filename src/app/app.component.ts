@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  doNothing(e:any):void{
+    e.preventDefault();
+    alert("This link is not functional yet");
+  }
 }

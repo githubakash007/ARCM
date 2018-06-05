@@ -1,0 +1,31 @@
+.bg-light {
+    background-color: #4599c3 !important;
+}
+
+.header-container{
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: #4599c3 !important;
+    padding: 10px;
+}
+
+.RightMenu {
+    line-height: 50px;
+    text-align: right;
+}
+
+ul.RightMenu {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.RightMenu li a {
+    color: #fff !important;
+    text-decoration: none;
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}

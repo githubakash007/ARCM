@@ -1,0 +1,6 @@
+.has-danger{
+    outline: 2px solid red;
+}
+.has-success{
+    outline: 2px solid green;
+}

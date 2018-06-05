@@ -1,0 +1,25 @@
+.modal {
+    background: rgba(0,0,0,0.6);
+    z-index: 5000 !important;
+  }
+
+  .modal-dialog{
+    /* max-width:60% !important; */
+}
+
+.modal-content {
+  position: fixed !important;
+}
+
+.modal-body{
+  /* padding: 5vh; */
+}
+
+.my-container{
+  flex:1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height:60%;
+  width:60%;
+}

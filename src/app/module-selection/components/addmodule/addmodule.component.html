@@ -1,0 +1,42 @@
+<form novalidate #moduleForm="ngForm" class="needs-validation">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-4">
+      <!-- [ngClass]="{'has-danger':(moduleForm.controls.dd1?.invalid && moduleForm.controls.dd1?.dirty),'has-success':(moduleForm.controls.dd1?.valid && moduleForm.controls.dd1?.dirty) }" -->
+        <arcm-dropdown [ddOptions]="segmentFilterValues"  (filterValue)="filterData($event,FilterName.Segment)"></arcm-dropdown>
+      </div>
+      <div class="col-sm-4">
+        <arcm-dropdown [ddOptions]="pbgFilterValues" (filterValue)="filterData($event,FilterName.PBG)"></arcm-dropdown>
+      </div>
+      <div class="col-sm-4">
+        <arcm-dropdown [ddOptions]="waferSizeFilterValues" (filterValue)="filterData($event,FilterName.WaferSize)"></arcm-dropdown>
+      </div>
+    </div>
+    <div class="row row-top-buffer"></div>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <div class="form-group" >
+          <label for="moduleName"></label>
+          <input type="text" class="form-control" id="moduleId" name="moduleName" ngModel  placeholder="Enter Module Name"
+            #input required [ngClass]="{'has-danger':(moduleForm.controls.moduleName?.invalid && moduleForm.controls.moduleName?.dirty),'has-success':(moduleForm.controls.moduleName?.valid && moduleForm.controls.moduleName?.dirty) }">
+          <div class="invalid-feedback">
+            Please choose a username.
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row row-top-buffer"></div>
+
+    <div class="row text-center">
+      <div class="col-sm-12">
+        <button type="button" class="btn btn-primary" type="submit" (click)="addNewModule(input.value)">Accept</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelAddingModule($event)">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+  <!-- <pre>{{moduleForm.value | json}}</pre>
+  <pre>{{moduleForm.controls.moduleName?.valid}}</pre> -->
+</form>

@@ -4,11 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4400 --base-href / -e local",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "localbuild": "ng build --base-href /ARCM.UI/ -e localdev --prod --aot",
+    "devbuild": "ng build --base-href /ARCM.UI/ -e dev --prod --aot"
   },
   "private": true,
   "dependencies": {
@@ -21,8 +23,15 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "bootstrap": "^4.1.1",
+    "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "primeng": "^5.2.6",
     "rxjs": "^5.5.6",
+    "toastr": "^2.1.4",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

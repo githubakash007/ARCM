@@ -1,0 +1,82 @@
+.set-font{
+    font-size: 1.1vw;
+}
+
+.no-text-wrap{
+    white-space: nowrap;
+}
+
+.no-data{
+    text-align: center;
+    color: red !important;
+    font-size: 1.5vw;
+    white-space: nowrap;
+    height: 10vh;
+    vertical-align: middle;
+}
+
+.module-filter{
+    text-align: right;
+}
+
+.dialog-bg{
+    background: rgba(0,0,0,.6) !important;
+}
+
+
+/* .ui-table .ui-table-thead > tr > th, .ui-table .ui-table-tfoot > tr > td{
+    background: rgb(246, 247, 249) !important;
+} */
+
+.main-flex-container{
+   display:flex;
+   flex-direction: column;
+}
+
+.grid-container{
+   padding: 20px;
+   font-family:"Open Sans !important";
+}
+
+.filters-flex-container{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+ }
+
+ .modal-header-text-center{
+    margin: 0 auto;
+ }
+ .close-button-margin{
+    margin:0px
+}
+
+.filter-section{
+    width: 70vw;
+    padding-left: 10px;
+}
+
+.btn-font-size{
+    font-size: 1.1vw !important;
+}
+
+
+
+::ng-deep .ui-table{
+   font-family: "Open Sans !important"; 
+}
+
+.main-container{
+background-color: white;
+padding: 30px;
+/* border: 1px solid lightgrey; */
+overflow: hidden;
+/* border-radius: 10px 10px; */
+clear: both;
+}
+
+#wrapper1 {
+    background-color: green; /* for visualization purposes */
+    text-align: center;
+    width:50% !important;
+  }

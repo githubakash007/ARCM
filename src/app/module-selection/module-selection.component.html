@@ -1,0 +1,123 @@
+<div class="main-container main-flex-container set-font">
+  <div id="filterSection" class="filter-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <div class="d-flex flex-row align-items-center">
+            <span class="col-xs-auto">Segment:</span>
+            <arcm-dropdown class="col" [ddOptions]="segmentFilterValues" [clearDropDown]="clearDropdownObservable | async" (filterValue)="selectedValueChanged($event,FilterName.Segment)"></arcm-dropdown>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="d-flex flex-row align-items-center">
+            <span class="col-xs-auto">PBG:</span>
+            <arcm-dropdown class="col" [ddOptions]="pbgFilterValues" [clearDropDown]="clearDropdownObservable | async" (filterValue)="selectedValueChanged($event,FilterName.PBG)"></arcm-dropdown>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="d-flex flex-row align-items-center">
+            <span class="col-xs-auto">Wafer Size:</span>
+            <arcm-dropdown class="col" [ddOptions]="waferSizeFilterValues" [clearDropDown]="clearDropdownObservable | async" (filterValue)="selectedValueChanged($event,FilterName.WaferSize)"></arcm-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="row row-top-buffer"></div>
+      <div class="row">
+        <div class="col-4">
+          <div class="d-flex flex-row align-items-center">
+            <span class="col-xs-auto">Validated:</span>
+            <arcm-dropdown class="col" [ddOptions]="['True','False']" [clearDropDown]="clearDropdownObservable | async" (filterValue)="selectedValueChanged($event,FilterName.TemplateModuleValidated)"></arcm-dropdown>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="d-flex flex-row align-items-center">
+            <span class="col-xs-auto">Released:</span>
+            <arcm-dropdown class="col" [ddOptions]="['True','False']" [clearDropDown]="clearDropdownObservable | async" (filterValue)="selectedValueChanged($event,FilterName.ModuleReleased)"></arcm-dropdown>
+          </div>
+        </div>
+        <div class="col-4">
+          <!-- <div class="form-group d-flex flex-row align-items-center">
+            <span class="col-xs-auto">Module Name:</span>
+            <input type="text" class="col" placeholder="Module Name" pInputText #inputModuleName />
+          </div> -->
+        </div>
+      </div>
+      <div class="row row-top-buffer"></div>
+      <div class="row row-top-buffer"></div>
+
+      <div class="row justify-content-center">
+        <div class="text-center">
+          <button type="button" class="btn btn-primary btn-md btn-font-size" (click)="filterModuleList($event)">Filter</button>
+          <button type="button" class="btn btn-primary btn-md btn-font-size" (click)="clearFilters($event)">Clear Filter</button>
+          <button type="button" class="btn btn-primary btn-md btn-font-size" (click)="showDialog($event)">Create Module</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- filterSection ends -->
+  <div class="row row-top-buffer"></div>
+
+  <div class="">
+    <div id="moduleGrid" class="grid-container" style="font-family:Open Sans !important;">
+      <p-table [columns]="cols" [autoLayout]="true" [pageLinks]="5" [value]="moduleList" [loading]="isLoading">
+        <ng-template pTemplate="caption">
+          <div class="module-filter">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" size="50" placeholder="Search Module" style="width:auto" #globalModuleSearchInput>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          </tr>
+
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div class="row">
+            <p class="col">Total Records: {{moduleCount}}</p>
+          </div>
+
+        </ng-template>
+        <ng-template pTemplate="body" let-data let-columns="columns">
+          <tr>
+            <td *ngFor="let col of columns" class="no-text-wrap">
+              {{data[col.field]}}
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+          <tr class="no-data">
+            <td [attr.colspan]="columns.length">
+              No Module Found !!
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+      <p-paginator [rows]="10" [totalRecords]="moduleCount" [rowsPerPageOptions]="[10,20,30,40]" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+
+  </div>
+</div>
+
+
+<arcm-modal-dialog [showFooter]="false" #addModuleDialog>
+
+  <div class="app-modal-header row" style="width:100%">
+    <h5 class="col-11" align="center">New Module</h5>
+    <button aria-label="Close" class="col-1 close" (click)="hideDialog($event)" data-dismiss="modal" type="button">
+      <span class="col" align="center" aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="app-modal-body">
+    <!-- <div id="wrapper1"> -->
+      <arcm-addmodule [segmentFilterValues]="segmentFilterValues" [pbgFilterValues]="pbgFilterValues" [waferSizeFilterValues]="waferSizeFilterValues"
+        (hideDialog)="hideModalDialog($event)" (reloadGrid)="reload($event)"></arcm-addmodule>
+    <!-- </div> -->
+  </div>
+</arcm-modal-dialog>
