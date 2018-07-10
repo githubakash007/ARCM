@@ -4,11 +4,12 @@
   }
 
   .modal-dialog{
-    /* max-width:60% !important; */
+    /* max-width:60vw !important; */
 }
 
 .modal-content {
   position: fixed !important;
+  max-width: inherit;
 }
 
 .modal-body{

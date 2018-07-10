@@ -1,0 +1,186 @@
+<div id="moduleContainer">
+    <div id="moduleVariantAndCMContainer">
+        <div id="moduleStatusContainer">
+            <fieldset class="module-status">
+                <legend class="module-status">Module Status</legend>
+                <div class="checkbox-inline">
+                    <label>
+                        <input type="checkbox" value="moduleDetail?.Module_Validated" [checked]="moduleDetail?.Module_Validated">Validated
+                    </label>
+                    <label>
+                        <input type="checkbox" value="moduleDetail?.Module_Released" [checked]="moduleDetail?.Module_Released">Released
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+        <div id="moduleVariantContainer">
+            <!-- <div style="width:70%;height:50%;margin: 10px;display: flex;align-items: stretch;flex-wrap: nowrap;"> -->
+            <div>
+                <!-- <div class="arcm-form-group">
+                    <label for="txtModuleName" class="arcm-form-label">Module Name:</label>
+                    <input type="text" class="arcm-form-control" id="txtModuleName" value={{moduleDetail?.Module_Name}} readonly>
+                </div> -->
+                <form>
+                    <!-- <div class="arcm-form-group">
+                        <label for="txtModuleName" class="arcm-form-label">Module Name:</label>
+                        <input type="text" class="arcm-form-control" id="txtModuleName" value={{moduleDetail?.Module_Name}} readonly>
+                    </div> -->
+                    <ng-template [ngIf]="!editVariant" #readonlyVariant>
+
+                        <div class="arcm-form-group">
+                            <div class="left-group">
+                                <label for="txtProcess" class="arcm-form-label">Process Type:</label>
+                                <input type="text" class="arcm-form-control" id="txtProcess" value={{moduleDetail?.Process_Type}} readonly>
+                            </div>
+                            <div class="right-group">
+                                <label for="txtCustomer" class="arcm-form-label">Customer Name:</label>
+                                <input type="text" class="arcm-form-control" id="txtCustomer" value={{moduleDetail?.CUSTOMER_SHORT_NAME_MARKETING}} readonly>
+                            </div>
+                        </div>
+
+                        <div class="arcm-form-group">
+                            <div class="left-group">
+                                <label for="txtTechnode" class="arcm-form-label">Tech Node:</label>
+                                <input type="text" class="arcm-form-control" id="txtTechnode" value={{moduleDetail?.Adv_Tech_Node}} readonly>
+                            </div>
+                            <div class="right-group">
+                                <label for="txtHW" class="arcm-form-label">HW Type:</label>
+                                <input type="text" class="arcm-form-control" id="txtHW" value={{moduleDetail?.HW_Type}} readonly>
+                            </div>
+                        </div>
+                        <div class="arcm-form-group">
+                            <div class="left-group">
+                                <label for="txtDevice" class="arcm-form-label">Device:</label>
+                                <input type="text" class="arcm-form-control" id="txtDevice" value={{moduleDetail?.Device}} readonly>
+                            </div>
+                            <div class="right-group">
+                                <label for="txtRegion" class="arcm-form-label">Region:</label>
+                                <input type="text" class="arcm-form-control" id="txtRegion" value="AMNA" readonly>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <!-- <ng-template [ngIf]="!editVariant" #readonlyVariant>
+
+                        <div class="arcm-form-group">
+                            <label for="txtCustomer" class="arcm-form-label">Customer Name:</label>
+                            <input type="text" class="arcm-form-control" id="txtCustomer" value={{moduleDetail?.CUSTOMER_SHORT_NAME_MARKETING}} readonly>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="txtProcess" class="arcm-form-label">Process Type:</label>
+                            <input type="text" class="arcm-form-control" id="txtProcess" value={{moduleDetail?.Process_Type}} readonly>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="txtTechnode" class="arcm-form-label">Tech Node:</label>
+                            <input type="text" class="arcm-form-control" id="txtTechnode" value={{moduleDetail?.Adv_Tech_Node}} readonly>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="txtHW" class="arcm-form-label">HW Type:</label>
+                            <input type="text" class="arcm-form-control" id="txtHW" value={{moduleDetail?.HW_Type}} readonly>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="txtDevice" class="arcm-form-label">Device:</label>
+                            <input type="text" class="arcm-form-control" id="txtDevice" value={{moduleDetail?.Device}} readonly>
+                        </div>
+                    </ng-template> -->
+                    <ng-template [ngIf]="editVariant" #editableVariant>
+                        <div class="arcm-form-group">
+                            <label for="ddlCustomer" class="arcm-form-label">Customer Name:</label>
+                            <kendo-dropdownlist id="ddlCustomer" class="arcm-form-control" [data]="variantList?.CustomerList?.slice(0,10)" [textField]="'CUSTOMER_SHORT_NAME_MARKETING'"
+                                [valueField]="'customer_code'" [defaultItem]="selectedVariants?.selectedCustomer" (selectionChange)="customerSelectionChange($event)">
+                            </kendo-dropdownlist>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="ddlProcess" class="arcm-form-label">Process Type:</label>
+                            <kendo-dropdownlist id="ddlProcess" class="arcm-form-control" [data]="variantList?.ProcessTypeList" [textField]="'Process_Type'"
+                                [valueField]="'ARCM_Process_Type_ID'" [defaultItem]="selectedVariants?.selectedProcessType" (selectionChange)="processSelectionChange($event)">
+                            </kendo-dropdownlist>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="ddlTechnode" class="arcm-form-label">Tech Node:</label>
+                            <kendo-dropdownlist id="ddlTechnode" class="arcm-form-control" [data]="variantList?.TechNodeList" [textField]="'Adv_Tech_Node'"
+                                [valueField]="'Adv_Tech_Node_Value'" [defaultItem]="selectedVariants?.selectedTechNode" (selectionChange)="techNodeSelectionChange($event)">
+                            </kendo-dropdownlist>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="ddlHW" class="arcm-form-label">HW Type:</label>
+                            <kendo-dropdownlist id="ddlHW" class="arcm-form-control" [data]="variantList?.HardwareTypeList" [textField]="'HW_Type'" [valueField]="'ARCM_HW_Type_ID'"
+                                [defaultItem]="selectedVariants?.selectedHardwareType" (selectionChange)="HWSelectionChange($event)">
+                            </kendo-dropdownlist>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="ddlDevice" class="arcm-form-label">Device Type:</label>
+                            <kendo-dropdownlist id="ddlDevice" class="arcm-form-control" [data]="variantList?.DeviceTypeList" [textField]="'Device'"
+                                [valueField]="'ARCM_Device_ID'" [defaultItem]="selectedVariants?.selectedDeviceType" (selectionChange)="deviceSelectionChange($event)">
+                            </kendo-dropdownlist>
+                        </div>
+                        <div class="arcm-form-group">
+                            <label for="ddlRegion" class="arcm-form-label">Region:</label>
+                            <kendo-dropdownlist id="ddlDevice" class="arcm-form-control" [data]="variantList?.RegionList" [textField]="'Region_Name'"
+                                [valueField]="'Region_ID'" (selectionChange)="regionSelectionChange($event)">
+                            </kendo-dropdownlist>
+                        </div>
+                    </ng-template>
+                    <!-- <div class="checkbox-inline">
+                        <label>
+                            <input type="checkbox" value="moduleDetail?.Module_Validated" [checked]="moduleDetail?.Module_Validated">Validated
+                        </label>
+                        <label>
+                            <input type="checkbox" value="moduleDetail?.Module_Released" [checked]="moduleDetail?.Module_Released">Released
+                        </label>
+                    </div> -->
+                    <div class="form-buttom-group">
+                        <button class="btn btn-primary" *ngIf="!editVariant" (click)="onEdit($event)">Edit</button>
+                        <button class="btn btn-primary" *ngIf="editVariant" (click)="onCancelEdit($event)">Cancel</button>
+                        <button class="btn btn-primary" [disabled]="!saveVariantBtnEnabled" (click)="onSaveModule($event)">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="moduleCMContainer">
+            <div class="CM-content">
+                CM Data goes here once avaliable.
+                <button class="btn btn-primary" (click)="copyFromThisModule($event)">Copy</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modulePMandPartsContainer">
+        <tabs>
+            <tab [tabTitle]="'Labor Hours'">
+                <div id="PmContainer">
+                    <div id="PmHeader"></div>
+                    <div id="PmBody">
+                        <pm-list [pmlist]="moduleDetail?.PMList"></pm-list>
+                    </div>
+                </div>
+            </tab>
+            <tab [tabTitle]="'Parts'">
+                <div id="partsContainer">
+                    <part-list [partlist]="moduleDetail?.PartList" [uniquePMList]="distictPMList"></part-list>
+                </div>
+            </tab>
+            <tab [tabTitle]="'Comments'">
+                <div class="comment">
+                    <textarea placeholder="Enter notes for this cost modal" #cmNotes></textarea>
+                    <button type="button" class="btn btn-success btn-lg" (click)="saveNotes($event,cmNotes.value)">Save Notes</button>
+                </div>
+            </tab>
+        </tabs>
+    </div>
+</div>
+
+<arcm-modal-dialog [inputModalPopupSizeClass]="'modal-sm'" #validationDialog>
+    <div class="app-modal-header row" style="width:100%">
+        <h5 class="col-11" align="center">Validation Failed.</h5>
+        <button aria-label="Close" class="col-1 close" (click)="hideDialog($event)" data-dismiss="modal" type="button">
+            <span class="col" align="center" aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="app-modal-body">
+        <p id="validationMessage">Same Configuration already exist.</p>
+    </div>
+    <div class="app-modal-footer">
+        <button class="btn btn-info" (click)="hideDialog($event)">Ok</button>
+    </div>
+</arcm-modal-dialog>

@@ -85,8 +85,14 @@
         </ng-template>
         <ng-template pTemplate="body" let-data let-columns="columns">
           <tr>
+
             <td *ngFor="let col of columns" class="no-text-wrap">
-              {{data[col.field]}}
+              <span *ngIf="col.field ==='ModuleName'">
+                <a href="#" (click)="goToCreateModulePage($event,data['ARCMModuleGroupId'])"> {{data[col.field]}}</a>
+              </span>
+              <span *ngIf="col.field !=='ModuleName'">
+               {{data[col.field]}}
+              </span>
             </td>
           </tr>
         </ng-template>
@@ -116,8 +122,8 @@
   </div>
   <div class="app-modal-body">
     <!-- <div id="wrapper1"> -->
-      <arcm-addmodule [segmentFilterValues]="segmentFilterValues" [pbgFilterValues]="pbgFilterValues" [waferSizeFilterValues]="waferSizeFilterValues"
-        (hideDialog)="hideModalDialog($event)" (reloadGrid)="reload($event)"></arcm-addmodule>
+    <arcm-addmodule [segmentFilterValues]="segmentFilterValues" [pbgFilterValues]="pbgFilterValues" [waferSizeFilterValues]="waferSizeFilterValues"
+      (hideDialog)="hideModalDialog($event)" (reloadGrid)="reload($event)"></arcm-addmodule>
     <!-- </div> -->
   </div>
 </arcm-modal-dialog>

@@ -1,0 +1,28 @@
+<div id="tabContainer">
+  <ul class="nav nav-tabs">
+    <li *ngFor="let tab of tabs" (click)="selectTab($event,tab)" class="nav-link" [class.active]="tab.active">
+      <div class="CM-tab">
+        <span [class.active]="tab.active">{{tab.tabTitle}}</span>
+        <!-- currently assuming that we can not delete the static tabs so comenting the below code. uncomment the below code to provide delete functionality for static tabs -->
+        <!-- <button *ngIf="tab.active" type="button" id="btnClose" class="close" (click)="closeTab(tab)" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+    </li>
+    <!-- dynamic tabs -->
+    <li *ngFor="let tab of dynamicTabs" (click)="selectTab($event,tab)" class="nav-link" [class.active]="tab.active">
+      <div class="CM-tab">
+        <span  [class.active]="tab.active">{{tab.tabTitle}}</span>
+        <button *ngIf="tab.isCloseable" type="button" id="btnClose" class="close" (click)="closeTab(tab)" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+    </li>
+  </ul>
+  <!-- <li *ngFor="let tab of dynamicTabs" (click)="selectTab(tab)" [class.active]="tab.active">
+      <span class="nav-link" [class.active]="tab.active">{{tab.tabTitle}}</span>
+      <span class="tab-close" *ngIf="tab.isCloseable" (click)="closeTab(tab)">x</span>
+    </li> -->
+  <ng-content></ng-content>
+  <ng-template #dynamicVariantTab></ng-template>
+</div>

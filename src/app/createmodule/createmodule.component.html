@@ -1,0 +1,72 @@
+<!-- <div>
+    <button class="btn btn-primary" (click)="goToModuleSelection($event)">Go Back</button>
+</div> -->
+
+<div class="create-module-container">
+    <div class="create-module-header">
+        <div class="groupModuleDetails">
+            <div id="Segment">
+                <span>
+                    Segment:
+                    <span>{{selectedBaseModule?.Segment}}</span>
+                </span>
+            </div>
+            <div id="PBG">
+                <span>PBG:</span>
+                <span>{{selectedBaseModule?.PBG}}</span>
+            </div>
+
+            <div id="ModuleName">
+                <span>Module Name:</span>
+                <span>{{selectedBaseModule?.ModuleName}}</span>
+            </div>
+            <div id="ModuleType">
+                <span>Module Type:</span>
+                <span>{{selectedBaseModule?.ModuleType}}</span>
+            </div>
+            <div id="waferSize">
+                <span>Wafer Size:</span>
+                <span>{{selectedBaseModule?.WaferSize}}</span>
+            </div>
+
+
+            <!-- Module Name:
+                    <span>{{selectedBaseModule?.ModuleName}}</span>
+                    Module Type:
+                    <span>{{selectedBaseModule?.ModuleType}}</span>
+                    Wafer Size:
+                    <span>{{selectedBaseModule?.WaferSize}}</span> -->
+
+        </div>
+        <div class="header-userActions">
+            <button class="btn btn-primary btn-sm" (click)="addNewCostModel($event)">New Variant</button>
+            <button class="btn btn-primary btn-sm" (click)="goToModuleSelection($event)">Go Back</button>
+            <button class="btn btn-primary btn-sm" (click)="backUpCurrentCostModel($event)">BackUp</button>
+        </div>
+    </div>
+
+
+
+    <div class="create-module-body">
+        <!-- <button class="btn btn-primary" (click)="copyFromExistingModule($event)">Copy</button> -->
+        <!-- *ngIf="moduleDetailList && moduleDetailList.length > 0" -->
+        <tabs >
+            <!-- This will be a loop for creating static tabs based on the number of variants -->
+            <tab [tabTitle]="moduleDetail?.Cost_Model_Name" *ngFor="let moduleDetail of moduleDetailList">
+                <base-module [moduleDetail]="moduleDetail" (onCopy)="createNewModuleFromExistingModule($event)" (onSuccessfulSave)="onSuccessfulModuleSave($event)"></base-module>
+            </tab>
+        </tabs>
+
+        <ng-template let-copyFromModule="copyFromModule" #addNewVariant>
+            <base-module [moduleDetail]='copyFromModule' (onCopy)="createNewModuleFromExistingModule($event)" (onSuccessfulSave)="onSuccessfulModuleSave($event)"></base-module>
+        </ng-template>
+    </div>
+</div>
+<!--
+<kendo-dialog title="Please confirm" *ngIf="isCopyFromDialogOpened" (close)="onCancel($event)">
+    <p style="margin: 30px; text-align: center;">Are you sure you want to continue?</p>
+    <kendo-dialog-actions>
+        <button kendoButton (click)="onCancel($event)">Cancel</button>
+        <button kendoButton (click)="onProceed($event)" primary="true">Proceed</button>
+    </kendo-dialog-actions>
+</kendo-dialog> -->

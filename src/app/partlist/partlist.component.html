@@ -1,0 +1,87 @@
+<!-- <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">PM_Name</th>
+      <th scope="col">PartNumber</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let part of partlist">
+      <td>{{part?.PM_Name}}</td>
+      <td>{{part?.PartNumber}}</td>
+    </tr>
+  </tbody>
+
+</table> -->
+
+<!-- <kendo-grid [data]="sampleProducts" [height]="410">
+  <kendo-grid-column field="ProductID" title="ID">
+  </kendo-grid-column>
+  <kendo-grid-column field="ProductName" title="Name">
+  </kendo-grid-column>
+  <kendo-grid-column field="Category.CategoryName" title="Category">
+  </kendo-grid-column>
+  <kendo-grid-column field="UnitPrice" title="Price" width="80">
+  </kendo-grid-column>
+  <kendo-grid-column field="UnitsInStock" title="In stock" width="80">
+  </kendo-grid-column>
+  <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+    </ng-template>
+  </kendo-grid-column>
+</kendo-grid> -->
+
+<div class="parts-container">
+  <div id="Parts-Header-container" class="Parts-Header-container">
+
+    <div class="parts-search">
+      <div class="input-group">
+        <input type="search" class="form-control" placeholder="Filter by part number">
+        <!-- <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span> -->
+      </div>
+     
+    </div>
+    <div class="part-add">
+        <button class="btn btn-primary">Add Part</button>
+    </div>
+    <div class="parts-filter">
+      <form>
+        <fieldset class="part-filter">
+          <legend class="part-filter">Filter Parts based on PM</legend>
+          <div class="form-check form-check-inline" *ngFor="let pm of uniquePMList;let i=index">
+            <input class="form-check-input" type="checkbox" (change)="filterParts($event,pm)" id="inlineCheckbox{{i}}" value={{pm}}>
+            <label class="form-check-label" for="inlineCheckbox{{i}}">{{pm}}</label>
+          </div>
+        </fieldset>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="partsgrid">
+    <kendo-grid [data]="filteredPartlist" [height]="410" (remove)="removePart($event)">
+      <kendo-grid-column field="PM_Name" title="PM Name">
+      </kendo-grid-column>
+      <kendo-grid-column field="PartNumber" title="Part Number">
+      </kendo-grid-column>
+      <kendo-grid-column field="Description" title="Desc">
+      </kendo-grid-column>
+      <kendo-grid-column field="Trigger_Name" title="Frequency">
+      </kendo-grid-column>
+      <kendo-grid-column field="Replace_Cost" title="Replace Cost">
+      </kendo-grid-column>
+      <kendo-grid-column field="Refurb_Cost" title="Repair Cost"> </kendo-grid-column>
+      <kendo-grid-command-column title="Remove">
+        <ng-template kendoGridCellTemplate let-dataitem="dataItem">
+          <span class="k-icon k-i-trash " (click)="removePart(dataitem)"></span>
+        </ng-template>
+      </kendo-grid-command-column>
+
+      <kendo-grid-column field="Cleaning_Cost" title="Cleaning Cost">
+      </kendo-grid-column>
+    </kendo-grid>
+  </div>
+</div>

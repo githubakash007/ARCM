@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ModuleService } from '../services/module.service';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit,OnDestroy } from '@angular/core';
 import { IModule } from './modal/IModule';
 import { Observable } from 'rxjs/Observable';
 import { IModuleSelection } from './modal/IModuleSelection';
@@ -8,6 +7,9 @@ import { debounceTime, distinctUntilChanged, startWith, tap, delay, catchError, 
 import { FilterName } from './enum/filterName.enum';
 import { IKeyValue } from './modal/IKeyValue';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { ModuleSelectionService } from '../services/moduleSelection.service';
+import { Router } from '@angular/router';
+import { AppStateService } from '../shared/service/appstate.service';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
   templateUrl: './module-selection.component.html',
   styleUrls: ['./module-selection.component.css']
 })
-export class ModuleSelectionComponent implements OnInit, AfterViewInit {
+export class ModuleSelectionComponent implements OnInit, AfterViewInit,OnDestroy {
 
   cols: any[];
   data: Observable<IModuleSelection>;
@@ -45,14 +47,14 @@ export class ModuleSelectionComponent implements OnInit, AfterViewInit {
   @ViewChild('addModuleDialog') addModuleDialog;
   @ViewChild('globalModuleSearchInput') globalModuleSearchInput: ElementRef;
   isVisible: boolean = false;
-  constructor(private _moduleService: ModuleService) { }
+  constructor(private _moduleService: ModuleSelectionService,private _router:Router,private _appState:AppStateService) { }
 
   ngOnInit() {
     this._moduleService.loadingObservable.subscribe(val => this.isLoading = val);
     this._moduleService.getModules(this.filterInputList);
     this._moduleService.moduleObservable.subscribe(modules => {
       if (modules && modules.length > 0) {
-        this.moduleCount = modules[0].TotalModuleCount;
+        this.moduleCount = modules[0].TotalBaseModuleCount;
        // console.log(`modal count is ${this.moduleCount}`);
       }
       else {
@@ -73,17 +75,18 @@ export class ModuleSelectionComponent implements OnInit, AfterViewInit {
 
 
     this.cols = [
-      { field: 'ModuleId', header: 'ModuleId' },
+      { field: 'ARCMModuleGroupId', header: 'ModuleId' },
       { field: 'ModuleName', header: 'ModuleName' },
+      { field: 'ModuleType', header: 'Module Type' },
       { field: 'WaferSize', header: 'WaferSize' },
       { field: 'PBG', header: 'PBG' },
-      { field: 'Division', header: 'Division' },
-      { field: 'KPU', header: 'KPU' },
-      { field: 'Application', header: 'Application' },
+      // { field: 'Division', header: 'Division' },
+      // { field: 'KPU', header: 'KPU' },
+      // { field: 'Application', header: 'Application' },
       { field: 'Plateform', header: 'Plateform' },
       { field: 'Segment', header: 'Segment' },
-      { field: 'ModuleReleased', header: 'ModuleReleased' },
-      { field: 'TemplateModuleValidated', header: 'TemplateModuleValidated' }
+      // { field: 'ModuleReleased', header: 'ModuleReleased' },
+      // { field: 'TemplateModuleValidated', header: 'TemplateModuleValidated' }
 
     ];
   }
@@ -192,6 +195,21 @@ export class ModuleSelectionComponent implements OnInit, AfterViewInit {
     return Math.floor(Math.random() * (100 - 1 + 1)) + 1;
     //return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+
+   goToCreateModulePage(e:any,groupId:number):void{
+     e.preventDefault();
+      console.log(groupId);
+      this._appState.setSelectedBaseModule(this.moduleList.find(x => x.ARCMModuleGroupId === groupId));
+
+      this._router.navigate(['./createModule', groupId]);
+   }
+
+   ngOnDestroy():void{
+    // this._moduleService.setSelectedBaseModule(this.moduleList.find(x => x.ARCMModuleGroupId === groupId));
+   }
+
+  
 
   
 

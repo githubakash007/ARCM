@@ -1,0 +1,64 @@
+.parts-container{
+    flex-grow: 1;
+    /* margin:4px; */
+    /* order:2; */
+    border: 1px solid white;
+    border-radius: 10px 10px;
+    /* padding: 5px; */
+    /* make it flex container */
+    display:flex;
+    flex-direction: column;
+}
+
+.Parts-Header-container{
+    flex-grow: 1;
+  /* make it flex container */
+  display: flex;
+  flex-direction: row wrap;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+.parts-filter{
+    display: flex;
+    flex: 4;
+    justify-content: center;
+    /* padding: 10px; */
+    order:3;
+}
+
+.parts-search{
+    flex: 3;
+    /* padding: 10px; */
+    order:1;
+    display: flex;
+    align-items: flex-start;
+}
+
+.part-add{
+   flex:1;
+   order:2;
+   display: flex;
+   align-items: flex-start;
+   justify-content: flex-start;
+
+}
+
+.partsgrid{
+    flex-grow:5;
+    width:100%;
+}
+
+fieldset.part-filter {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.part-filter {
+    width:inherit; 
+    padding:0 2px; 
+    border-bottom:none;
+    font-size: inherit;
+}

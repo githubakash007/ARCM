@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FilterName } from '../../enum/filterName.enum';
-import { ModuleService } from '../../../services/module.service';
 import { NotificationService } from '../../../shared/service/notification.service';
+import { ModuleSelectionService } from '../../../services/moduleSelection.service';
 
 @Component({
   selector: 'arcm-addmodule',
@@ -10,7 +10,7 @@ import { NotificationService } from '../../../shared/service/notification.servic
 })
 export class AddmoduleComponent implements OnInit {
 
-  constructor(private _moduleService: ModuleService,private _notificationService:NotificationService) { }
+  constructor(private _moduleService: ModuleSelectionService,private _notificationService:NotificationService) { }
 
   @Input() segmentFilterValues: string[] = [];
   @Input() pbgFilterValues: string[] = [];

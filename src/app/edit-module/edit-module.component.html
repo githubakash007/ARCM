@@ -1,0 +1,10 @@
+<ng-template>
+  
+ 
+</ng-template>
+
+<select #selectElem (change)="setNewUser(selectElem.value)">
+  <option *ngFor="let user of lUsers" [value]="user.id">
+      {{user.Name}}
+  </option>
+</select>

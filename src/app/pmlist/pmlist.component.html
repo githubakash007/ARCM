@@ -1,0 +1,35 @@
+<kendo-grid [data]="pmlist">
+    <kendo-grid-column field="PM_Name" title="PM Name">
+    </kendo-grid-column>
+    <kendo-grid-column field="PM_Labor_Level" title="PM/Maint Level">
+    </kendo-grid-column>
+    <kendo-grid-column field="Trigger_Name" title="PM Freq">
+    </kendo-grid-column>
+    <kendo-grid-column field="Edit_PM_Frequency" title="RFP Edit" width="120">
+        <ng-template kendoGridCellTemplate let-dataItem>
+          <input type="checkbox" [checked]="dataItem.Edit_PM_Frequency" />
+        </ng-template>
+      </kendo-grid-column>
+
+      <!-- <kendo-grid-command-column title="Parts">
+          <ng-template kendoGridCellTemplate let-dataitem="dataItem">
+            <span class="k-icon k-i-trash " (click)="removePM(dataitem)"></span>
+            <input type="checkbox" (click)="filterParts(dataitem.PM_Name)" />
+          </ng-template>
+        </kendo-grid-command-column> -->
+    
+   
+  
+    <kendo-grid-command-column title="Remove">
+      <ng-template kendoGridCellTemplate let-dataitem="dataItem">
+        <!-- <button kendoGridEditCommand [primary]="true">Edit</button> -->
+        <span class="k-icon k-i-trash " (click)="removePM(dataitem)"></span>
+        <!-- <button kendoGridRemoveCommand (click)="removePart($event)">Remove</button> 
+                <button kendoGridSaveCommand >Save</button> -->
+        <!-- <button kendoGridCancelCommand>{{ isNew ? 'Discard changes' : 'Cancel' }}</button> -->
+      </ng-template>
+    </kendo-grid-command-column>
+    <!-- <ng-template kendoGridCellTemplate let-dataItem>
+            <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+        </ng-template> -->
+    </kendo-grid>

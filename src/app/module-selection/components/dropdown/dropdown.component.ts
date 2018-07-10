@@ -31,7 +31,7 @@ export class DropdownComponent implements OnInit, OnChanges {
       this.selectedFilterValue = '';
     }
     
-    //console.log("in dropdown comp");
+    // console.log("in dropdown comp");
     // console.log(change.currentValue);
     // console.log(change);
     if (change) {

@@ -1,0 +1,65 @@
+.create-module-container{
+    display:flex;
+    flex-flow: column wrap;
+}
+
+.create-module-header{
+    flex:1;
+    display: flex;
+    flex-flow: row wrap;
+    order:1;
+    margin-bottom: 1rem;
+    background-color: lightsteelblue;
+
+}
+.create-module-body{
+    flex:1;
+    order:2;
+}
+.groupModuleDetails{
+    flex:3;
+    display:flex;
+    /* border: 1px solid grey; */
+    border-right: 1px solid grey;
+    padding:0 1rem;
+   
+    align-items: center;
+}
+
+.header-userActions{
+     flex:1;
+     display:flex;  
+     flex-flow: row wrap;
+     align-items: center;
+     justify-content: space-evenly;
+}
+
+#Segment{
+  flex:1;
+  order:1;
+  text-align: center;
+}
+
+#PBG{
+    flex:1;
+    order:2;
+    text-align: center;
+}
+
+#ModuleName{
+    flex:3;
+    order:3;
+    text-align: center;
+}
+
+#ModuleType{
+    flex:2;
+    order:4;
+    text-align: center;
+}
+
+#waferSize{
+    /* flex:1; */
+    order:5;
+    text-align: center;
+}

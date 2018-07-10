@@ -1,14 +1,24 @@
 import { IModuleFilters } from "./IModuleFilters";
 
+//old one
+// export interface IModule extends IModuleFilters {
+//     ModuleId:number,
+//     ModuleName:string,
+//     Division:string,
+//     KPU:string,
+//     Application:string,
+//     Plateform:string,
+//     ModuleReleased:boolean,
+//     TemplateModuleValidated:boolean,
+//     TotalModuleCount:number
+// }
+
+//New one
 export interface IModule extends IModuleFilters {
-    ModuleId:number,
+    ARCMModuleGroupId:number,
     ModuleName:string,
-    Division:string,
-    KPU:string,
-    Application:string,
+    ModuleType:string,
     Plateform:string,
-    ModuleReleased:boolean,
-    TemplateModuleValidated:boolean,
-    TotalModuleCount:number
+    TotalBaseModuleCount:number
 }
 

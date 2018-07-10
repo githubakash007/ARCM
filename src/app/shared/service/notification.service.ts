@@ -14,7 +14,7 @@ export class NotificationService implements INotificationService {
       "closeButton": true,
       "positionClass": "toast-top-right",
       "preventDuplicates": false,
-      "showDuration": "1000",
+      "showDuration": "2000",
       "hideDuration": "1000",
       "timeOut": "1000",
       "extendedTimeOut": "1000",
